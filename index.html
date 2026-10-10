@@ -2,8 +2,7 @@
 <html lang="ms"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Quranic AR – Demo AR (penanda Hiro)</title>
-<!-- Versions follow the AR.js README marker example: A-Frame 1.3.0 + aframe-ar.js (marker build, tag 3.4.5).
-     NOTE: confirm both URLs open in a browser before relying on them (not testable offline). -->
+<!-- Unchanged from v1: A-Frame 1.3.0 + AR.js 3.4.5 marker build (aframe-ar.js), Hiro preset. -->
 <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js"></script>
 <style>
@@ -15,56 +14,75 @@ h1{font-size:1.6rem;margin:.2em 0}
 .badge{display:inline-block;border:2px solid #f0b860;color:#f0b860;font-weight:700;font-size:.85rem;padding:2px 8px;border-radius:6px}
 ol{padding-left:1.3em}li{margin:.5em 0}
 a{color:#f0b860}
-button,a.btn{display:inline-block;min-height:48px;box-sizing:border-box;font:inherit;font-weight:700;border-radius:12px;border:2px solid #f0b860;background:#f0b860;color:#1b2a26;padding:10px 18px;margin:6px 6px 6px 0;cursor:pointer;text-decoration:none}
+button,a.btn{display:inline-block;min-height:48px;box-sizing:border-box;font:inherit;font-weight:700;border-radius:12px;border:2px solid #f0b860;background:#f0b860;color:#1b2a26;padding:10px 18px;margin:6px 6px 6px 0;cursor:pointer;text-decoration:none;text-align:center}
 button.sec,a.btn.sec{background:transparent;color:#fff;border-color:#fff}
 :focus-visible{outline:4px solid #fff;outline-offset:2px}
 .note{border-left:6px solid #f0b860;padding-left:10px}
 #err{background:#fff;color:#7a0000;font-weight:700;padding:10px;border-radius:8px;margin-top:10px}
 #ar{position:fixed;inset:0;z-index:1}
-#bar{position:fixed;left:0;right:0;top:0;z-index:10;padding:calc(8px + env(safe-area-inset-top,0px)) 8px 8px;display:flex;gap:6px;flex-wrap:wrap;background:rgba(11,59,48,.85)}
-#bar[hidden],#intro[hidden],#err[hidden],#cap[hidden]{display:none}
-#cap{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:10;background:#fff;color:#1b2a26;padding:10px 14px;border-radius:12px;border:3px solid #0b5d4b}
-#hint{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:9;background:rgba(11,59,48,.9);padding:10px 14px;border-radius:12px}
+#bar{position:fixed;left:0;right:0;top:0;z-index:10;padding:calc(6px + env(safe-area-inset-top,0px)) 8px 6px;display:flex;gap:6px;flex-wrap:wrap;background:rgba(11,59,48,.88)}
+#bar button{margin:0;min-height:44px;padding:6px 14px}
+#dock{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:10;display:flex;flex-direction:column;gap:8px}
+#dock a.big{display:block;margin:0;font-size:1.1rem;min-height:56px}
+#hint{background:rgba(11,59,48,.92);padding:10px 14px;border-radius:12px}
+#cap{background:#fff;color:#1b2a26;padding:10px 14px;border-radius:12px;border:3px solid #0b5d4b;font-size:.95rem;line-height:1.45}
+#cap b{font-size:1.05rem}
+[hidden]{display:none!important}
 </style></head><body>
 
 <div id="intro"><div class="wrap">
  <p><button class="sec" id="lang" aria-label="Tukar bahasa / Switch language">BM / EN</button></p>
- <span class="badge">CREATED — REQUIRES REAL-PHONE TESTING</span>
+ <span class="badge">AR DEMO — REAL-PHONE TESTING IN PROGRESS</span>
  <h1 data-ms="Quranic AR: Demo AR" data-en="Quranic AR: AR demo">Quranic AR: Demo AR</h1>
- <p data-ms="Demo ini menunjukkan visual simbolik di atas penanda Hiro. Visual ini bukan gambaran manusia atau peristiwa sejarah. Teks Quran dan tafsir berada dalam modul pembelajaran." data-en="This demo shows a symbolic visual above a Hiro marker. It is not a depiction of any person or historical event. Quranic text and tafsir are in the learning module.">Demo ini menunjukkan visual simbolik di atas penanda Hiro. Visual ini bukan gambaran manusia atau peristiwa sejarah. Teks Quran dan tafsir berada dalam modul pembelajaran.</p>
+ <p data-ms="Imbas penanda Hiro untuk membuka pintu masuk ke Modul 1: Kisah Surah ‘Abasa 80:1–10. Visual AR hanyalah simbol; ia bukan gambaran manusia atau peristiwa sejarah. Teks Quran dan kandungan pembelajaran berada dalam modul pembelajaran." data-en="Scan the Hiro marker to open the entry point to Module 1: the narrative of Surah ‘Abasa 80:1–10. The AR visual is only a symbol; it is not a depiction of any person or historical event. Quranic text and learning content are in the learning module.">Imbas penanda Hiro untuk membuka pintu masuk ke Modul 1: Kisah Surah ‘Abasa 80:1–10. Visual AR hanyalah simbol; ia bukan gambaran manusia atau peristiwa sejarah. Teks Quran dan kandungan pembelajaran berada dalam modul pembelajaran.</p>
  <h2 data-ms="Cara menggunakan" data-en="How to use">Cara menggunakan</h2>
  <ol>
   <li data-ms="Buka halaman ini dalam Chrome di telefon Android (bukan dalam pelayar dalam aplikasi seperti WhatsApp atau Facebook)." data-en="Open this page in Chrome on an Android phone (not inside an in-app browser such as WhatsApp or Facebook).">Buka halaman ini dalam Chrome di telefon Android (bukan dalam pelayar dalam aplikasi seperti WhatsApp atau Facebook).</li>
   <li><span data-ms="Sediakan penanda Hiro: cetak dengan ruang putih sekurang-kurangnya 2 cm di sekelilingnya, atau paparkan pada skrin lain. " data-en="Prepare the Hiro marker: print it with at least 2 cm of white space around it, or show it on another screen. ">Sediakan penanda Hiro: cetak dengan ruang putih sekurang-kurangnya 2 cm di sekelilingnya, atau paparkan pada skrin lain. </span><a href="hiro-marker-print.html" target="_blank" rel="noopener" data-ms="Buka halaman cetakan penanda" data-en="Open marker print page">Buka halaman cetakan penanda</a></li>
   <li data-ms="Tekan “Mula AR”. Apabila Chrome meminta kebenaran kamera, ketik “Benarkan” (Allow)." data-en="Press “Start AR”. When Chrome asks for camera permission, tap “Allow”.">Tekan “Mula AR”. Apabila Chrome meminta kebenaran kamera, ketik “Benarkan” (Allow).</li>
   <li data-ms="Halakan kamera ke penanda supaya seluruh bingkai hitam kelihatan. Pastikan cahaya mencukupi, penanda rata dan tiada silau." data-en="Point the camera at the marker so the whole black frame is visible. Use good light, keep the marker flat and avoid glare.">Halakan kamera ke penanda supaya seluruh bingkai hitam kelihatan. Pastikan cahaya mencukupi, penanda rata dan tiada silau.</li>
+  <li data-ms="Apabila tajuk kisah muncul, ketik butang “Terokai Kisah Surah ‘Abasa” di bahagian bawah skrin." data-en="When the title appears, tap the “Explore the Surah ‘Abasa narrative” button at the bottom of the screen.">Apabila tajuk kisah muncul, ketik butang “Terokai Kisah Surah ‘Abasa” di bahagian bawah skrin.</li>
   <li data-ms="Jika kamera ditolak: ketik ikon di sebelah alamat laman → Kebenaran/Tetapan laman → Kamera → Benarkan, kemudian muat semula halaman." data-en="If the camera was blocked: tap the icon beside the address → Permissions/Site settings → Camera → Allow, then reload the page.">Jika kamera ditolak: ketik ikon di sebelah alamat laman → Kebenaran/Tetapan laman → Kamera → Benarkan, kemudian muat semula halaman.</li>
  </ol>
- <p class="note" data-ms="Halaman ini tidak merakam atau menghantar imej kamera. Paparan kamera diproses pada peranti anda. Kamera memerlukan sambungan HTTPS." data-en="This page does not record or send camera images. The camera view is processed on your device. The camera needs an HTTPS connection.">Halaman ini tidak merakam atau menghantar imej kamera. Paparan kamera diproses pada peranti anda. Kamera memerlukan sambungan HTTPS.</p>
+ <p class="note" data-ms="Halaman ini tidak merakam atau menghantar imej kamera; paparan kamera diproses pada peranti anda. Kamera memerlukan HTTPS. Prototaip ini menunjukkan pengalaman pembelajaran yang dicadangkan; kesannya terhadap empati dan hasil pembelajaran belum dikaji secara empirikal." data-en="This page does not record or send camera images; the camera view is processed on your device. The camera needs HTTPS. This prototype shows a proposed learning experience; its effects on empathy and learning outcomes have not yet been studied empirically.">Halaman ini tidak merakam atau menghantar imej kamera; paparan kamera diproses pada peranti anda. Kamera memerlukan HTTPS. Prototaip ini menunjukkan pengalaman pembelajaran yang dicadangkan; kesannya terhadap empati dan hasil pembelajaran belum dikaji secara empirikal.</p>
  <p><button id="start" data-ms="Mula AR" data-en="Start AR">Mula AR</button>
- <a class="btn sec" href="quranic-ar-prototype.html" data-ms="Modul pembelajaran (tanpa AR)" data-en="Learning module (no AR)">Modul pembelajaran (tanpa AR)</a></p>
+ <button id="resume" hidden data-ms="Kembali ke AR" data-en="Back to AR">Kembali ke AR</button>
+ <a class="btn sec" href="quranic-ar-prototype.html" data-ms="Modul pembelajaran tanpa AR" data-en="Learning module without AR">Modul pembelajaran tanpa AR</a></p>
  <div id="err" role="alert" hidden></div>
 </div></div>
 
 <div id="bar" hidden>
- <a class="btn sec" href="quranic-ar-prototype.html" data-ms="Modul pembelajaran" data-en="Learning module">Modul pembelajaran</a>
+ <button class="sec" id="close" data-ms="Tutup AR" data-en="Close AR">Tutup AR</button>
  <button class="sec" id="help" data-ms="Bantuan" data-en="Help">Bantuan</button>
+ <button class="sec" id="lang2" aria-label="Tukar bahasa / Switch language">BM / EN</button>
 </div>
-<div id="hint" hidden aria-live="polite" data-ms="Halakan kamera ke penanda Hiro…" data-en="Point the camera at the Hiro marker…">Halakan kamera ke penanda Hiro…</div>
-<div id="cap" role="status" aria-live="polite" hidden data-ms="Penerangan teks: sebuah buku terbuka berwarna hijau di tengah, dikelilingi cincin keemasan dengan lima bentuk kecil yang berbeza warna, berputar perlahan. Ia simbol pembelajaran yang dikongsi bersama. Tiada manusia digambarkan." data-en="Text description: a green open book in the centre, surrounded by a gold ring with five small shapes of different colours, slowly rotating. It symbolises shared learning. No person is depicted.">Penerangan teks: sebuah buku terbuka berwarna hijau di tengah, dikelilingi cincin keemasan dengan lima bentuk kecil yang berbeza warna, berputar perlahan. Ia simbol pembelajaran yang dikongsi bersama. Tiada manusia digambarkan.</div>
+<div id="dock" hidden>
+ <div id="hint" aria-live="polite" data-ms="Halakan kamera ke penanda Hiro…" data-en="Point the camera at the Hiro marker…">Halakan kamera ke penanda Hiro…</div>
+ <div id="cap" role="status" aria-live="polite" hidden>
+  <b data-ms="Penanda dikesan: Kisah Surah ‘Abasa 80:1–10" data-en="Marker found: the narrative of Surah ‘Abasa 80:1–10">Penanda dikesan: Kisah Surah ‘Abasa 80:1–10</b><br>
+  <span data-ms="Ketik butang di bawah untuk membaca ayat, terjemahan, tafsir dan renungan dalam modul pembelajaran. Visual AR ialah simbol sahaja: buku terbuka hijau dan cincin keemasan dengan lima bentuk kecil; tiada manusia digambarkan." data-en="Tap the button below to read the verses, translation, tafsir and reflection in the learning module. The AR visual is symbolic only: a green open book and a gold ring with five small shapes; no person is depicted.">Ketik butang di bawah untuk membaca ayat, terjemahan, tafsir dan renungan dalam modul pembelajaran. Visual AR ialah simbol sahaja: buku terbuka hijau dan cincin keemasan dengan lima bentuk kecil; tiada manusia digambarkan.</span>
+ </div>
+ <a class="btn big" id="explore" href="quranic-ar-prototype.html" data-ms="Terokai Kisah Surah ‘Abasa" data-en="Explore the Surah ‘Abasa narrative">Terokai Kisah Surah ‘Abasa</a>
+</div>
 <div id="ar"></div>
 
 <script>
-var lang="ms",started=false,loaded=false;
+var lang="ms",started=false,loaded=false,wasClosed=false,timer=null;
 function $(i){return document.getElementById(i)}
-function applyLang(){document.documentElement.lang=lang;document.querySelectorAll("[data-ms]").forEach(function(e){var t=e.getAttribute("data-"+lang);if(t)e.textContent=t});}
-$("lang").onclick=function(){lang=lang==="ms"?"en":"ms";applyLang()};
-function showErr(ms,en){var e=$("err");e.hidden=false;e.textContent=lang==="ms"?ms:en;$("intro").hidden=false;$("bar").hidden=true;$("hint").hidden=true;}
+function ss(k,v){try{if(v===undefined)return sessionStorage.getItem(k);if(v===null)sessionStorage.removeItem(k);else sessionStorage.setItem(k,v)}catch(e){return null}}
+var T3={ms:["Kisah Surah 'Abasa 80:1-10","Ketik butang di bawah skrin"],en:["Narrative of Surah 'Abasa 80:1-10","Tap the button at the bottom"]};
+function applyLang(){document.documentElement.lang=lang;document.querySelectorAll("[data-ms]").forEach(function(e){var t=e.getAttribute("data-"+lang);if(t)e.textContent=t});
+ var a=$("t1"),b=$("t2");if(a)a.setAttribute("value",T3[lang][0]);if(b)b.setAttribute("value",T3[lang][1]);ss("qar-lang",lang)}
+function toggleLang(){lang=lang==="ms"?"en":"ms";applyLang()}
+$("lang").onclick=toggleLang;$("lang2").onclick=toggleLang;
+function showErr(ms,en){var e=$("err");e.hidden=false;e.textContent=lang==="ms"?ms:en;$("intro").hidden=false;$("bar").hidden=true;$("dock").hidden=true;}
 window.addEventListener("arjs-video-loaded",function(){loaded=true;});
 window.addEventListener("camera-error",function(){showErr("Kamera tidak dapat dibuka. Semak kebenaran kamera dan pastikan halaman ini menggunakan HTTPS.","The camera could not be opened. Check camera permission and that this page uses HTTPS.");});
-$("start").onclick=function(){
+function startAR(){
+ if(wasClosed){ss("qar-auto","1");location.reload();return;} /* clean restart after Close AR */
  if(typeof AFRAME==="undefined"){showErr("Pustaka AR tidak dapat dimuatkan. Semak sambungan internet, kemudian muat semula. Anda masih boleh menggunakan modul pembelajaran tanpa AR.","The AR libraries could not be loaded. Check your internet connection and reload. You can still use the learning module without AR.");return;}
- if(started)return;started=true;$("err").hidden=true;
+ if(started){$("intro").hidden=true;return;}
+ started=true;loaded=false;$("err").hidden=true;
  $("ar").innerHTML='<a-scene embedded vr-mode-ui="enabled: false" renderer="logarithmicDepthBuffer: true; precision: medium;" arjs="sourceType: webcam; debugUIEnabled: false;">'+
  '<a-marker id="m" preset="hiro" smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5">'+
  '<a-entity position="0 0.9 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 14000; easing: linear">'+
@@ -77,16 +95,29 @@ $("start").onclick=function(){
   '<a-octahedron position="-0.485 0 -0.35" radius="0.1" color="#6A3D7A"></a-octahedron>'+
   '<a-cylinder position="0.185 0 -0.57" radius="0.08" height="0.14" color="#2A9D8F"></a-cylinder>'+
  '</a-entity>'+
- '<a-entity position="0 1.8 0" look-at="[camera]"><a-plane width="2.4" height="0.45" color="#0B3B30"></a-plane>'+
-  '<a-text value="Hormat · Perhatian · Akses untuk semua" align="center" width="2.2" color="#FFFFFF" position="0 0 0.01"></a-text></a-entity>'+
+ '<a-entity position="0 1.9 0" look-at="[camera]"><a-plane width="2.7" height="0.8" color="#0B3B30"></a-plane>'+
+  '<a-text id="t1" value="" align="center" width="2.5" color="#FFFFFF" position="0 0.17 0.01"></a-text>'+
+  '<a-text id="t2" value="" align="center" width="2.1" color="#F0B860" position="0 -0.17 0.01"></a-text></a-entity>'+
  '</a-marker><a-entity camera></a-entity></a-scene>';
  document.documentElement.style.background="transparent";document.body.style.background="transparent";
- $("intro").hidden=true;$("bar").hidden=false;$("hint").hidden=false;
+ $("intro").hidden=true;$("bar").hidden=false;$("dock").hidden=false;$("hint").hidden=false;$("cap").hidden=true;$("resume").hidden=false;$("start").hidden=true;applyLang();
  var m=$("m");
  m.addEventListener("markerFound",function(){$("hint").hidden=true;$("cap").hidden=false;});
  m.addEventListener("markerLost",function(){$("cap").hidden=true;$("hint").hidden=false;});
- setTimeout(function(){if(!loaded)showErr("Kamera belum bersedia selepas 15 saat. Semak kebenaran kamera/HTTPS, atau gunakan modul pembelajaran tanpa AR.","The camera was not ready after 15 seconds. Check camera permission/HTTPS, or use the learning module without AR.");},15000);
-};
-$("help").onclick=function(){location.reload();};
-applyLang();
+ clearTimeout(timer);timer=setTimeout(function(){if(started&&!loaded)showErr("Kamera belum bersedia selepas 15 saat. Semak kebenaran kamera/HTTPS, atau gunakan modul pembelajaran tanpa AR.","The camera was not ready after 15 seconds. Check camera permission/HTTPS, or use the learning module without AR.");},15000);
+}
+function closeAR(){
+ clearTimeout(timer);
+ try{document.querySelectorAll("video").forEach(function(v){var s=v.srcObject;if(s&&s.getTracks)s.getTracks().forEach(function(t){t.stop()});v.remove()})}catch(e){}
+ $("ar").innerHTML="";document.querySelectorAll(".a-canvas,#arjs-video").forEach(function(e){e.remove()});
+ started=false;wasClosed=true;
+ document.documentElement.style.background="";document.body.style.background="";
+ $("bar").hidden=true;$("dock").hidden=true;$("resume").hidden=true;$("start").hidden=false;$("err").hidden=true;$("intro").hidden=false;
+}
+$("start").onclick=startAR;
+$("close").onclick=closeAR;
+$("help").onclick=function(){$("intro").hidden=false;};
+$("resume").onclick=function(){$("intro").hidden=true;};
+lang=ss("qar-lang")==="en"?"en":"ms";applyLang();
+window.addEventListener("load",function(){if(ss("qar-auto")==="1"){ss("qar-auto",null);startAR();}});
 </script></body></html>
