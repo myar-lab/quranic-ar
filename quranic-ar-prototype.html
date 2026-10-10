@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quranic AR – Module 1 (Non-AR Route Prototype)</title>
+<style>
+:root{--bg:#fbf8f1;--fg:#1b2a26;--card:#fff;--ac:#0b5d4b;--ac2:#7a4b00;--bd:#8aa59d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10201c;--fg:#f1efe6;--card:#182b26;--ac:#6fd3b8;--ac2:#f0b860;--bd:#4d6d63}}
+:root[data-theme="dark"]{--bg:#10201c;--fg:#f1efe6;--card:#182b26;--ac:#6fd3b8;--ac2:#f0b860;--bd:#4d6d63}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.2em 0}h2{font-size:1.25rem}
+.card{background:var(--card);border:2px solid var(--bd);border-radius:14px;padding:16px;margin:12px 0}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;border:2px solid currentColor;border-radius:6px;padding:0 8px;margin-bottom:6px}
+.quran{color:var(--ac)}.trans{color:var(--fg)}.proj{color:var(--ac2)}
+.ar{font-family:"Amiri","Scheherazade New","Traditional Arabic",serif;font-size:2rem;line-height:2.3;direction:rtl;text-align:right}
+button{min-height:48px;min-width:48px;font:inherit;font-weight:700;border-radius:12px;border:2px solid var(--ac);background:var(--ac);color:var(--bg);padding:8px 18px;margin:6px 6px 6px 0;cursor:pointer}
+button.sec{background:transparent;color:var(--ac)}
+button:focus-visible,textarea:focus-visible,input:focus-visible{outline:4px solid var(--ac2);outline-offset:2px}
+nav.top{display:flex;gap:6px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.step{font-weight:700}.screen{display:none}.screen.on{display:block}
+textarea{width:100%;min-height:90px;font:inherit;border:2px solid var(--bd);border-radius:10px;padding:8px;background:var(--bg);color:var(--fg);box-sizing:border-box}
+label.opt{display:block;padding:8px;border:2px solid var(--bd);border-radius:10px;margin:6px 0}
+.note{border-left:6px solid var(--ac2);padding-left:10px}
+.target{width:100%;max-width:320px;display:block;margin:auto;border:3px solid var(--fg)}
+.scroll{overflow-x:auto}
+@media print{nav,button{display:none}}
+</style></head><body><main>
+<nav class="top"><span class="step" id="step" aria-live="polite"></span>
+<span><button class="sec" id="lang" aria-label="Switch language">BM / EN</button><button class="sec" id="theme" aria-label="Toggle dark or light">◐ Theme</button></span></nav>
+
+<section class="screen on" id="s0" aria-labelledby="t0">
+<svg width="84" height="84" viewBox="0 0 84 84" role="img" aria-label="Project logo: an open book with a ring of light above it"><rect width="84" height="84" rx="16" fill="#0b5d4b"/><path d="M14 56V30q14-6 28 2 14-8 28-2v26q-14-6-28 2-14-8-28-2z" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/><circle cx="42" cy="18" r="8" fill="none" stroke="#f0b860" stroke-width="4"/></svg>
+<h1 id="t0" data-en="Quranic AR" data-ms="Quranic AR">Quranic AR</h1>
+<p data-en="A Quranic narrative learning experience about respect, attentiveness and inclusive learning. Module 1: Surah ‘Abasa 80:1–10." data-ms="Pengalaman pembelajaran naratif Quran tentang hormat, perhatian dan pembelajaran inklusif. Modul 1: Surah ‘Abasa 80:1–10.">A Quranic narrative learning experience about respect, attentiveness and inclusive learning. Module 1: Surah ‘Abasa 80:1–10.</p>
+<p class="note" data-en="This is a single narrative. It does not represent every person's experience of disability." data-ms="Ini hanya satu naratif. Ia tidak mewakili pengalaman setiap orang kurang upaya.">This is a single narrative. It does not represent every person's experience of disability.</p>
+<button data-go="1" data-en="Start learning" data-ms="Mula belajar">Start learning</button>
+</section>
+
+<section class="screen" id="s1" aria-labelledby="t1">
+<h2 id="t1" data-en="Choose your route" data-ms="Pilih laluan">Choose your route</h2>
+<div class="card"><b data-en="AR route (needs external setup)" data-ms="Laluan AR (perlu persediaan luar)">AR route (needs external setup)</b>
+<ol><li>Open the team's MyWebAR project link in Chrome on Android.</li><li>Allow camera permission and an internet connection.</li><li>Point the camera at the printed image target below.</li></ol>
+<p class="note">Status: the AR project link is <b>not yet created</b>. This page does not perform AR; it is the non-AR route to the same content.</p>
+<svg class="target" viewBox="0 0 300 300" role="img" aria-label="Sample image target: placeholder pattern. Replace with the final marker uploaded to the AR platform."><rect width="300" height="300" fill="#fff"/><g fill="#0b5d4b"><polygon points="0,0 120,0 0,150"/><circle cx="220" cy="70" r="46"/><rect x="40" y="190" width="90" height="70"/><polygon points="300,300 170,300 300,170"/></g><g fill="#7a4b00"><polygon points="150,120 190,200 110,200"/><rect x="230" y="150" width="40" height="40"/></g><path d="M20 160q60-40 110 10t130-20" stroke="#000" stroke-width="6" fill="none"/></svg>
+<p style="text-align:center;font-size:.9rem">Placeholder target – final marker to be chosen and tested for tracking quality.</p></div>
+<button data-go="2" data-en="Continue without AR" data-ms="Teruskan tanpa AR">Continue without AR</button>
+</section>
+
+<section class="screen" id="s2" aria-labelledby="t2">
+<h2 id="t2">Surah ‘Abasa 80:1–10</h2>
+<div class="card"><span class="tag quran">① QURANIC TEXT</span>
+<div class="ar" lang="ar">عَبَسَ وَتَوَلَّىٰٓ ﴿١﴾ أَن جَآءَهُ ٱلْأَعْمَىٰ ﴿٢﴾ وَمَا يُدْرِيكَ لَعَلَّهُۥ يَزَّكَّىٰٓ ﴿٣﴾ أَوْ يَذَّكَّرُ فَتَنفَعَهُ ٱلذِّكْرَىٰٓ ﴿٤﴾ أَمَّا مَنِ ٱسْتَغْنَىٰ ﴿٥﴾ فَأَنتَ لَهُۥ تَصَدَّىٰ ﴿٦﴾ وَمَا عَلَيْكَ أَلَّا يَزَّكَّىٰ ﴿٧﴾ وَأَمَّا مَن جَآءَكَ يَسْعَىٰ ﴿٨﴾ وَهُوَ يَخْشَىٰ ﴿٩﴾ فَأَنتَ عَنْهُ تَلَهَّىٰ ﴿١٠﴾</div>
+<p class="note">⚠ Team to verify word-for-word against a printed Mushaf (e.g. Madinah Mushaf) before presenting. Audio recitation not included: a licensed recording is required.</p></div>
+<div class="card"><span class="tag trans">② MALAY TRANSLATION</span>
+<p><i>[Insert verses 1–10 from your chosen, citable Malay translation (e.g. Tafsir Pimpinan Ar-Rahman) with edition and page. Not reproduced here because it could not be verified.]</i></p></div>
+<div class="card"><span class="tag">③ TAFSIR</span>
+<p>Classical tafsir reports the passage in connection with ʿAbdullāh ibn Umm Maktūm RA. The Arabic verses themselves do not name him. <i>[Team: add exact wording/page from Ibn Kathīr and al-Ṭabarī, and the Tirmidhī report, after checking.]</i></p></div>
+<div class="card"><span class="tag proj">④ PROJECT COMMENTARY (our interpretation)</span>
+<p>The passage invites reflection on giving sincere attention to a person who comes seeking guidance, regardless of status or ability. Applying it to inclusive learning is the team's educational reading, not a claim made by the text.</p>
+<button class="sec" id="read">🔊 Read commentary aloud</button>
+<div id="cap" aria-live="polite" class="note" hidden></div></div>
+<button class="sec" data-go="1" data-en="Back" data-ms="Kembali">Back</button><button data-go="3" data-en="Next" data-ms="Seterusnya">Next</button>
+</section>
+
+<section class="screen" id="s3" aria-labelledby="t3">
+<h2 id="t3">Visual learning</h2>
+<div class="card">
+<svg viewBox="0 0 320 180" width="100%" role="img" aria-labelledby="alt"><title id="alt">Abstract illustration of two paths meeting at a lit book</title><rect width="320" height="180" fill="#e9f3ef"/><path d="M20 170Q100 120 150 110" stroke="#0b5d4b" stroke-width="8" fill="none"/><path d="M300 170Q220 120 170 110" stroke="#7a4b00" stroke-width="8" stroke-dasharray="14 8" fill="none"/><path d="M130 100v-30q30-10 30 6 0-16 30-6v30q-30-10-30 6 0-16-30-6z" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="160" cy="40" r="18" fill="none" stroke="#7a4b00" stroke-width="5"/></svg>
+<p><b>Text alternative:</b> Two different paths, one solid and one dashed, lead to the same open book under a ring of light. It is symbolic only: no people are depicted, and it is not a historical reconstruction.</p></div>
+<button class="sec" data-go="2" data-en="Back" data-ms="Kembali">Back</button><button data-go="4" data-en="Next" data-ms="Seterusnya">Next</button>
+</section>
+
+<section class="screen" id="s4" aria-labelledby="t4">
+<h2 id="t4">Reflection (not an assessment)</h2>
+<p class="note">Answers stay on this device screen only and are not scored.</p>
+<div class="card"><b>1. How can we show respect when someone approaches us to seek knowledge?</b>
+<label class="opt"><input type="radio" name="q1"> Give full attention and eye or voice contact</label>
+<label class="opt"><input type="radio" name="q1"> Ask how they prefer to receive information</label>
+<label class="opt"><input type="radio" name="q1"> Other (write below)</label><textarea aria-label="Your answer to question 1"></textarea></div>
+<div class="card"><b>2. What assumptions might stop us from giving someone proper attention?</b><textarea aria-label="Your answer to question 2"></textarea></div>
+<div class="card"><b>3. What practical action could make a learning space more inclusive?</b><textarea aria-label="Your answer to question 3"></textarea></div>
+<button class="sec" data-go="3" data-en="Back" data-ms="Kembali">Back</button><button data-go="5" data-en="Next" data-ms="Seterusnya">Next</button>
+</section>
+
+<section class="screen" id="s5" aria-labelledby="t5">
+<h2 id="t5">Learning summary</h2>
+<div class="card"><ul><li>Attention and respect are owed to anyone who comes seeking guidance.</li><li>Outward status should not decide how much care we give.</li><li>Practical ideas: ask about access needs, offer text, audio and visual versions, and involve persons with disabilities in design.</li></ul>
+<p class="note">At this stage, the prototype demonstrates the proposed learning experience and its technical functionality. Its effects on empathy and learning outcomes have not yet been established through empirical evaluation.</p>
+<p><b>References (to verify before use):</b> Qur’an 80:1–10; Ibn Kathīr, <i>Tafsīr al-Qur’ān al-ʿAẓīm</i> on Sūrat ʿAbasa; al-Ṭabarī, <i>Jāmiʿ al-Bayān</i>; al-Tirmidhī, <i>Sunan</i>, Tafsīr Sūrat ʿAbasa; Malay translation: [edition/page].</p></div>
+<button class="sec" data-go="4" data-en="Back" data-ms="Kembali">Back</button><button data-go="0" data-en="Restart" data-ms="Mula semula">Restart</button>
+</section>
+</main>
+<script>
+var cur=0,lang="en",N=6,S=document.querySelectorAll(".screen");
+function show(i){cur=i;S.forEach(function(s,k){s.classList.toggle("on",k===i)});document.getElementById("step").textContent=(lang==="en"?"Screen ":"Skrin ")+(i+1)+"/"+N;window.scrollTo(0,0);if(i===0){document.querySelectorAll("textarea").forEach(function(t){t.value=""});document.querySelectorAll("input").forEach(function(r){r.checked=false})}}
+document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){show(+b.dataset.go)}});
+document.getElementById("lang").onclick=function(){lang=lang==="en"?"ms":"en";document.documentElement.lang=lang;document.querySelectorAll("[data-en]").forEach(function(e){e.textContent=e.dataset[lang]});show(cur)};
+document.getElementById("theme").onclick=function(){var r=document.documentElement;r.dataset.theme=r.dataset.theme==="dark"?"light":"dark"};
+document.getElementById("read").onclick=function(){var t="The passage invites reflection on giving sincere attention to a person who comes seeking guidance, regardless of status or ability.";var c=document.getElementById("cap");c.hidden=false;c.textContent=t;try{speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(t))}catch(e){c.textContent=t+" (Audio not supported on this device.)"}};
+show(0);
+</script></body></html>
