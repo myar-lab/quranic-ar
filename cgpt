@@ -1,0 +1,192 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Quranic AR — Scene Prototype</title>
+<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
+<style>
+  :root { --ink:#17231f; --paper:#fffaf0; --gold:#d6a94f; --green:#245b4b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,Segoe UI,sans-serif; color:var(--ink); background:#111; }
+  #ar-scene { position:fixed; inset:0; }
+  #topbar { position:fixed; top:0; left:0; right:0; z-index:10; padding:12px 14px; color:white;
+    background:linear-gradient(#101915d9, #10191500); pointer-events:none; }
+  #topbar strong { display:block; font-size:16px; }
+  #topbar span { font-size:12px; opacity:.9; }
+  #panel { position:fixed; z-index:11; left:12px; right:12px; bottom:12px; max-height:48vh; overflow:auto;
+    background:var(--paper); border-radius:18px; padding:14px; box-shadow:0 8px 30px #0006; }
+  #panel h1 { font-size:18px; margin:0 0 5px; }
+  #panel p { font-size:14px; line-height:1.45; margin:7px 0; }
+  .hint { font-size:12px !important; color:#53615b; }
+  .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  button { border:0; border-radius:12px; padding:11px 13px; font-size:14px; font-weight:650; cursor:pointer; }
+  .primary { background:var(--green); color:white; }
+  .secondary { background:#e8e3d7; color:var(--ink); }
+  .hidden { display:none !important; }
+  #status { position:fixed; top:68px; left:12px; z-index:10; max-width:calc(100% - 24px); padding:8px 10px;
+    border-radius:10px; color:white; background:#17231fd9; font-size:12px; }
+  #cameraHelp { font-size:12px; color:#4d5b55; }
+  @media (min-width:700px) {
+    #panel { left:auto; right:18px; bottom:18px; width:370px; max-height:70vh; }
+    #topbar { padding:18px 22px; }
+  }
+</style>
+</head>
+<body>
+<div id="topbar">
+  <strong>Quranic AR · Surah ‘Abasa</strong>
+  <span>Prototype scene · Marker-based augmented reality</span>
+</div>
+<div id="status">Benarkan akses kamera dan halakan kamera ke marker Hiro.</div>
+
+<a-scene id="ar-scene" embedded vr-mode-ui="enabled:false"
+  renderer="colorManagement:true; physicallyCorrectLights:true; antialias:true"
+  arjs="sourceType:webcam; trackingMethod:best; debugUIEnabled:false;">
+  <a-assets>
+    <a-mixin id="sand" material="color:#d7bc88; roughness:0.95"></a-mixin>
+    <a-mixin id="stone" material="color:#b68b5d; roughness:0.95"></a-mixin>
+  </a-assets>
+
+  <a-marker preset="hiro" id="hiroMarker">
+    <!-- Miniature educational courtyard; intentionally no identifiable sacred figure -->
+    <a-entity id="diorama" position="0 0 0">
+      <!-- base -->
+      <a-cylinder position="0 0.015 0" radius="0.92" height="0.05" material="color:#d7bc88"></a-cylinder>
+      <a-cylinder position="0 0.045 0" radius="0.82" height="0.025" material="color:#f0dfb7"></a-cylinder>
+      <!-- courtyard walls -->
+      <a-box position="0 0.34 -0.68" width="1.35" height="0.58" depth="0.08" material="color:#d0aa74"></a-box>
+      <a-box position="-0.66 0.28 -0.12" width="0.08" height="0.48" depth="1.18" material="color:#c69b67"></a-box>
+      <a-box position="0.66 0.28 -0.12" width="0.08" height="0.48" depth="1.18" material="color:#c69b67"></a-box>
+      <!-- simple arch-like backdrop -->
+      <a-box position="0 0.53 -0.72" width="0.42" height="0.48" depth="0.045" material="color:#9c754f"></a-box>
+      <a-cylinder position="0 0.77 -0.72" radius="0.21" height="0.05" rotation="90 0 0" material="color:#9c754f"></a-cylinder>
+      <a-box position="0 0.53 -0.69" width="0.28" height="0.38" depth="0.05" material="color:#e8d2a8"></a-box>
+      <!-- woven mat -->
+      <a-box position="0 0.09 0.02" width="0.82" height="0.025" depth="0.54" rotation="0 0 0" material="color:#9b7653"></a-box>
+      <a-box position="0 0.106 0.02" width="0.76" height="0.008" depth="0.48" material="color:#d8b878"></a-box>
+      <!-- generic seated figure A -->
+      <a-entity position="-0.25 0.12 -0.13">
+        <a-cylinder position="0 0.22 0" radius="0.105" height="0.25" material="color:#315d52"></a-cylinder>
+        <a-sphere position="0 0.39 0" radius="0.09" material="color:#b9835b"></a-sphere>
+        <a-cylinder position="0 0.48 0" radius="0.095" height="0.045" material="color:#f0e5cd"></a-cylinder>
+        <a-box position="0.12 0.24 0.04" width="0.22" height="0.055" depth="0.07" rotation="0 0 -12" material="color:#315d52"></a-box>
+      </a-entity>
+      <!-- generic seated figure B -->
+      <a-entity position="0.28 0.12 -0.13">
+        <a-cylinder position="0 0.22 0" radius="0.105" height="0.25" material="color:#8b6249"></a-cylinder>
+        <a-sphere position="0 0.39 0" radius="0.09" material="color:#9c6847"></a-sphere>
+        <a-cylinder position="0 0.48 0" radius="0.095" height="0.045" material="color:#e9d9b9"></a-cylinder>
+      </a-entity>
+      <!-- generic learner figure, slightly forward, not representing a specific historical likeness -->
+      <a-entity position="0.0 0.12 0.42">
+        <a-cylinder position="0 0.18 0" radius="0.09" height="0.20" material="color:#536f8a"></a-cylinder>
+        <a-sphere position="0 0.33 0" radius="0.078" material="color:#9c6847"></a-sphere>
+        <a-cylinder position="0 0.405 0" radius="0.082" height="0.035" material="color:#f0e5cd"></a-cylinder>
+        <a-cylinder position="-0.12 0.10 0.02" radius="0.035" height="0.16" rotation="0 0 -40" material="color:#536f8a"></a-cylinder>
+        <a-cylinder position="0.12 0.10 0.02" radius="0.035" height="0.16" rotation="0 0 40" material="color:#536f8a"></a-cylinder>
+      </a-entity>
+      <!-- floating interaction markers -->
+      <a-sphere class="hotspot" data-topic="context" position="-0.43 0.82 0.12" radius="0.075" material="color:#d6a94f; emissive:#7c5720; emissiveIntensity:0.35"
+        animation="property:scale; to:1.12 1.12 1.12; dir:alternate; dur:900; loop:true"></a-sphere>
+      <a-sphere class="hotspot" data-topic="reflect" position="0.44 0.77 0.25" radius="0.075" material="color:#4d8b78; emissive:#173e33; emissiveIntensity:0.25"
+        animation="property:scale; to:1.12 1.12 1.12; dir:alternate; dur:1000; loop:true"></a-sphere>
+      <a-text value="TEROKAI" position="-0.35 0.98 0.18" align="center" width="1.2" color="#24483d" rotation="-25 0 0"></a-text>
+      <a-text value="RENUNG" position="0.47 0.92 0.29" align="center" width="1.1" color="#24483d" rotation="-25 0 0"></a-text>
+    </a-entity>
+  </a-marker>
+
+  <a-entity camera>
+    <a-cursor fuse="false" raycaster="objects:.hotspot" material="color:#ffffff; shader:flat"></a-cursor>
+  </a-entity>
+</a-scene>
+
+<div id="panel">
+  <h1 id="panelTitle">Mulakan pengalaman AR</h1>
+  <p id="panelText">Imbas marker Hiro untuk melihat diorama pendidikan 3D. Tekan butang di bawah untuk meneroka naratif dan refleksi.</p>
+  <p id="cameraHelp">Nota: diorama ini ialah visual konsep, bukan rekonstruksi sejarah atau gambaran wajah mana-mana tokoh agama.</p>
+  <div class="actions">
+    <button class="primary" id="contextBtn">Terokai naratif</button>
+    <button class="secondary" id="reflectBtn">Renungkan empati</button>
+    <button class="secondary" id="accessBtn">Mod teks</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  const title = document.getElementById('panelTitle');
+  const text = document.getElementById('panelText');
+  const help = document.getElementById('cameraHelp');
+  const status = document.getElementById('status');
+  const marker = document.getElementById('hiroMarker');
+  const scene = document.getElementById('ar-scene');
+  let textMode = false;
+
+  const views = {
+    start: {
+      title: 'Mulakan pengalaman AR',
+      text: 'Imbas marker Hiro untuk melihat diorama pendidikan 3D. Pilih “Terokai naratif” untuk melihat konteks pembelajaran atau “Renungkan empati” untuk soalan refleksi.',
+      help: 'Diorama ini ialah visual konsep, bukan rekonstruksi sejarah. Tiada wajah Rasulullah SAW digambarkan.'
+    },
+    context: {
+      title: 'Terokai naratif Surah ‘Abasa',
+      text: 'Surah ‘Abasa 80:1–10 menjadi asas kajian kes ini. Terokai ayat dan terjemahan yang disahkan dalam modul utama. Visual 3D ini hanya membantu membina konteks; ia tidak menggantikan ayat atau tafsir.',
+      help: 'Sahkan teks Arab, terjemahan dan ringkasan tafsir daripada sumber yang dipilih sebelum digunakan dalam pertandingan.'
+    },
+    reflect: {
+      title: 'Renungkan empati',
+      text: 'Bayangkan seseorang datang untuk mendapatkan ilmu tetapi merasakan dirinya tidak diberikan perhatian. Apakah perasaan yang mungkin timbul, dan apakah tindakan yang boleh membantu mewujudkan suasana pembelajaran yang lebih menghormati?',
+      help: 'Soalan ini ialah aktiviti refleksi pendidikan, bukan ujian psikologi atau bukti bahawa empati pengguna telah meningkat.'
+    },
+    access: {
+      title: 'Mod teks tanpa kamera',
+      text: 'Mod ini membolehkan pengguna membaca penerangan tanpa menggunakan AR. Dalam versi prototaip ini, teks ringkas disediakan di sini. Untuk menjadikannya lebih mudah diakses, kandungan penuh perlu disertakan dengan teks boleh laras, kontras jelas dan pilihan audio/transkrip yang diuji.',
+      help: 'Mod teks ini ialah alternatif asas; ia belum membuktikan kesesuaian untuk semua kategori OKU.'
+    }
+  };
+
+  function show(key) {
+    const v = views[key];
+    title.textContent = v.title;
+    text.textContent = v.text;
+    help.textContent = v.help;
+  }
+
+  document.getElementById('contextBtn').addEventListener('click', () => show('context'));
+  document.getElementById('reflectBtn').addEventListener('click', () => show('reflect'));
+  document.getElementById('accessBtn').addEventListener('click', () => {
+    textMode = !textMode;
+    if (textMode) {
+      scene.classList.add('hidden');
+      status.classList.add('hidden');
+      document.getElementById('accessBtn').textContent = 'Kembali ke AR';
+      show('access');
+    } else {
+      scene.classList.remove('hidden');
+      status.classList.remove('hidden');
+      document.getElementById('accessBtn').textContent = 'Mod teks';
+      show('start');
+    }
+  });
+
+  document.querySelectorAll('.hotspot').forEach(el => {
+    el.addEventListener('click', () => show(el.getAttribute('data-topic') === 'context' ? 'context' : 'reflect'));
+  });
+
+  marker.addEventListener('markerFound', () => {
+    status.textContent = 'Marker dikesan — diorama AR sedang dipaparkan.';
+  });
+  marker.addEventListener('markerLost', () => {
+    status.textContent = 'Marker tidak kelihatan. Halakan kamera semula ke marker Hiro.';
+  });
+})();
+</script>
+</body>
+</html>
+'''
+path = Path("/mnt/data/quranic-ar-scene-prototype.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created: {path}")
